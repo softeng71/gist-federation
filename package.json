@@ -1,0 +1,23 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start:Gateway": "lerna run start --scope=gateway --no-prefix --parallel",
+    "start:GistServ": "npm run start:_app -- --scope=Gist-Service",
+    "start:DBServ": "npm run start:_app -- --scope=Db-Service",
+    "start:services": "npm run start:_app -- --ignore=gateway",
+    "start:_app": "lerna run start --concurrency=20 --parallel",
+    "postinstall": "lerna bootstrap --hoist --force-local",
+    "poststop": "npm run stop-main; npm run stop-services",
+    "stop-main": "npx kill-port 4050",
+    "stop-services": "npx kill-port 4100 4200"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "lerna": "^3.22.1"
+  }
+}
